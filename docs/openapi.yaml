@@ -1,0 +1,23 @@
+openapi: 3.0.3
+info:
+  title: King Castle School Muhammad Campus API
+  version: 1.0.0
+servers:
+  - url: /api/v1
+components:
+  securitySchemes:
+    bearerAuth: {type: http, scheme: bearer, bearerFormat: JWT}
+  schemas:
+    Success: {type: object, properties: {success: {type: boolean}, message: {type: string}, data: {}}}
+    Error: {type: object, properties: {success: {type: boolean}, message: {type: string}, errors: {}}}
+paths:
+  /auth/login: {post: {summary: Login, requestBody: {required: true}, responses: {'200': {description: Success}}}}
+  /auth/refresh-token: {post: {summary: Refresh JWT, responses: {'200': {description: Success}}}}
+  /auth/me: {get: {security: [{bearerAuth: []}], responses: {'200': {description: Success}}}}
+  /dashboard/stats: {get: {security: [{bearerAuth: []}], responses: {'200': {description: Success}}}}
+  /students: {get: {security: [{bearerAuth: []}], responses: {'200': {description: Success}}}, post: {security: [{bearerAuth: []}], responses: {'201': {description: Created}}}}
+  /teachers: {get: {security: [{bearerAuth: []}], responses: {'200': {description: Success}}}, post: {security: [{bearerAuth: []}], responses: {'201': {description: Created}}}}
+  /attendance/students: {post: {security: [{bearerAuth: []}], responses: {'200': {description: Success}}}}
+  /fees/student-fees: {get: {security: [{bearerAuth: []}], responses: {'200': {description: Success}}}}
+  /fees/receive-payment: {post: {security: [{bearerAuth: []}], responses: {'201': {description: Created}}}}
+  /messages: {get: {security: [{bearerAuth: []}], responses: {'200': {description: Success}}}, post: {security: [{bearerAuth: []}], responses: {'201': {description: Created}}}}
